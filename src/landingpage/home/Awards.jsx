@@ -6,4 +6,4 @@ const Awards = () => {
   )
 }
 
-export default Awards
+export default Awards;

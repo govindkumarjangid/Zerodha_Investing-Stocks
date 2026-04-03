@@ -5,5 +5,5 @@ const OpenAccount = () => {
     <div>OpenAccount</div>
   )
 }
-
+ 
 export default OpenAccount
