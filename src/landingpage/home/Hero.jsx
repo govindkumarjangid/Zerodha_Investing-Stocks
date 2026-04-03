@@ -3,7 +3,7 @@ const Hero = () => {
   return (
     <div className="max-w-7xl p-5 mb-5 mx-auto">
       <div className="flex flex-col text-center">
-        <img src="./images/homeHero.png" alt="Hero Image" className="mb-10 mt-30 w-[55%] max-h-[50vh] mx-auto" />
+        <img src="./images/homeHero.png" alt="Hero Image" className="mb-10 mt-30 md:w-[70%] max-h-[60vh] mx-auto" />
         <h1 className="my-3 text-3xl text-text-color">Invest in everything</h1>
         <p className="text-xl mb-10 text-text-color">
           Online platform to invest in stocks, derivatives, mutual funds, and

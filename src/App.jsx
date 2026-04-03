@@ -7,6 +7,7 @@ import AboutPage from './landingpage/about/AboutPage';
 import ProductsPage from './landingpage/products/ProductPage';
 import SupportPage from './landingpage/support/SupportPage';
 import Footer from './landingpage/UI/Footer';
+import NotFound from './landingpage/UI/NotFound';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path='/about' element={<AboutPage />}/>
       <Route path='/products' element={<ProductsPage/>}/>
       <Route path='/support' element={<SupportPage/>}/>
+      <Route path='*' element={<NotFound />}/>
      </Routes>
     <Footer />
     </>
