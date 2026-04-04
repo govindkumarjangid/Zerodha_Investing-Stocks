@@ -4,8 +4,8 @@ import Brokerage from './Brokerage';
 const PricingPage = () => {
   return (
     <>
-      <Hero />
-      <Brokerage />
+        <Hero />
+        <Brokerage />
     </>
   )
 }
