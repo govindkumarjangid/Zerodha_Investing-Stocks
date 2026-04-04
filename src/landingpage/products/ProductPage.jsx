@@ -1,14 +1,12 @@
 import Hero from './Hero';
-import LeftSection from './LeftSection';
-import RightSection from './RightSection';
+import ProductSections from './ProductSections';
 import Universe from './Universe';
 
 const ProductPage = () => {
     return (
         <>
             <Hero />
-            <LeftSection />
-            <RightSection />
+            <ProductSections />
             <Universe />
         </>
     )
