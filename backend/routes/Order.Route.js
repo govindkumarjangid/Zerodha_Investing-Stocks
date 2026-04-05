@@ -1,9 +1,11 @@
 import express from 'express'
-import { getOrders } from '../controllers/Order.Controller.js';
+import { createOrder, getOrders } from '../controllers/Order.Controller.js';
+import { protect } from '../middlware/protect.js';
 
 const orderRoute = express.Router();
 
-orderRoute.get('/get-orders', getOrders);
+orderRoute.get('/get-orders', protect, getOrders);
+orderRoute.post('/create-order', protect, createOrder);
 
 
 export default orderRoute;

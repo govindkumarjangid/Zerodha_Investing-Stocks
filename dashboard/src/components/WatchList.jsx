@@ -1,5 +1,5 @@
 import { watchlist } from "../data/data";
-import  DoughnoutChart  from "./DoughnoutChart";
+import DoughnoutChart from "./DoughnoutChart";
 import WatchListItem from "../ui/WatchListItem";
 
 const labels = watchlist.map((subArray) => subArray["name"]);
@@ -34,7 +34,7 @@ const WatchList = () => {
   };
 
   return (
-     <div className="h-full shadow-md overflow-y-auto relative">
+    <div className="h-full shadow-md overflow-y-auto relative">
 
       {/* Search Bar */}
       <div className="flex items-center relative">

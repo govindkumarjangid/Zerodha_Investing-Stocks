@@ -5,6 +5,7 @@ import connectDb from './configs/connectDb.js';
 import holdingRoute from './routes/Holding.Route.js';
 import orderRoute from './routes/Order.Route.js';
 import positionRoute from './routes/Position.Route.js';
+import userRoute from './routes/User.Route.js';
 
 dotenv.config();
 
@@ -17,13 +18,14 @@ connectDb();
 
 // middlewares
 app.use(cors());
+app.use(express.json());
 
 
 // routes
 app.get('/', (req, res) => {
     res.send("Zerodha Clone Server APIs")
 })
-
+app.use('/api/auth', userRoute);
 app.use('/api/holding', holdingRoute);
 app.use('/api/order', orderRoute);
 app.use('/api/position', positionRoute);

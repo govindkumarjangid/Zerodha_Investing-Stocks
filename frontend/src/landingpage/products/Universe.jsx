@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 
 const Universe = () => {
   const platforms = [
@@ -65,9 +66,9 @@ const Universe = () => {
         </div>
 
         {/* Call to Action Button */}
-         <button className="mb-5 w-50 m-auto px-6 py-3 bg-primary hover:bg-primary-dull text-white text-xl rounded-sm shadow-xl cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 text-shadow-2xs">
+         <Link to="/signup" className="mb-5 w-50 m-auto px-6 py-3 bg-primary hover:bg-primary-dull text-white text-xl rounded-sm shadow-xl cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 text-shadow-2xs">
           Sign up for free
-        </button>
+        </Link>
 
       </div>
     </section>

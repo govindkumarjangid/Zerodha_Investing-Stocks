@@ -18,3 +18,26 @@ export const getOrders = async (req, res) => {
 
     }
 }
+
+
+export const createOrder = async (req, res) => {
+    try {
+        const { name, qty, price, mode } = req.body;
+
+        const newOrder = await Order({
+            name,
+            qty,
+            price,
+            mode
+        })
+
+        newOrder.save();
+
+        return res.status(200).json({ message: "Order create successfull" });
+
+
+    } catch (error) {
+        console.log("Internel server error", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}

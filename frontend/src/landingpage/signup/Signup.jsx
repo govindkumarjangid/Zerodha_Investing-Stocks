@@ -1,9 +1,16 @@
 import React from 'react'
+import Hero from './Hero';
+import Steps from './Steps';
+import OpenAccount from '../UI/OpenAccount';
 
 const Signup = () => {
   return (
-    <div>Signup</div>
+    <>
+      <Hero />
+      <Steps />
+      <OpenAccount />
+    </>
   )
 }
 
-export default Signup
+export default Signup;

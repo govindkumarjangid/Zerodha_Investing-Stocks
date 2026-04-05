@@ -5,11 +5,12 @@ import { BarChartOutlined, MoreHoriz } from "@mui/icons-material";
 
 const WatchListActions = ({ uid }) => {
 
-    const { openBuyWindow } = useContext(GeneralContext);
-    
-    console.log(openBuyWindow)
+    const { openBuyWindow, setMode } = useContext(GeneralContext);
 
-    const handleBuyClick = () => {
+
+    const handleBuyClick = (mode) => {
+        setMode(mode);
+        console.log(mode)
         openBuyWindow(uid);
     };
 
@@ -18,14 +19,16 @@ const WatchListActions = ({ uid }) => {
             <span className="flex items-center">
                 <Tooltip title="Buy (B)" placement="top">
                     <button
-                        onClick={handleBuyClick}
+                        onClick={() => handleBuyClick("Buy")}
                         className="w-10 h-7.5 rounded bg-blue-400 text-white text-sm border border-blue-400 mr-2 cursor-pointer active:scale-95 transition-transform duration-200"
                     >
                         Buy
                     </button>
                 </Tooltip>
                 <Tooltip title="Sell (S)" placement="top">
-                    <button className="w-10 h-7.5 rounded bg-red-400 text-white text-sm border border-red-400 mr-2 cursor-pointer active:scale-95 transition-transform duration-200">
+                    <button
+                        onClick={() => handleBuyClick("Sell")}
+                        className="w-10 h-7.5 rounded bg-red-400 text-white text-sm border border-red-400 mr-2 cursor-pointer active:scale-95 transition-transform duration-200">
                         Sell
                     </button>
                 </Tooltip>
