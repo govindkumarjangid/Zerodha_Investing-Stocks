@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import  VerticalGraph  from "./VerticalGraph";
-import axios from 'axios'
+import {holdings} from '../data/data';
 
 const Holdings = () => {
 
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/allHoldings").then((res) => {
-      setAllHoldings(res.data);
-    });
+      setAllHoldings(holdings);
   }, []);
 
   const labels = allHoldings.map((subArray) => subArray["name"]);
@@ -54,25 +52,25 @@ const Holdings = () => {
             {allHoldings.map((stock, index) => {
               const curValue = stock.price * stock.qty;
               const isProfit = curValue - stock.avg * stock.qty >= 0.0;
-              const profClass = isProfit ? "text-[rgb(72,194,55)]" : "text-[rgb(250,118,78)]";
-              const dayClass = stock.isLoss ? "text-[rgb(250,118,78)]" : "text-[rgb(72,194,55)]";
+              const profClass = isProfit ? "text-green-400" : "text-red-400";
+              const dayClass = stock.isLoss ? "text-red-400" : "text-green-400";
 
               return (
-                <tr key={index} className="border-t border-b border-[rgb(211,211,211)]">
-                  <td className="py-2.5 px-2.5 text-left font-normal text-sm text-[rgb(73,73,73)] border-r border-[#f1f1f1]">
+                <tr key={index} className="border-t border-b border-gray-300">
+                  <td className="py-2.5 px-2.5 text-left text-sm text-gray-600 border-l border-r border-gray-300">
                     {stock.name}
                   </td>
-                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)]">{stock.qty}</td>
-                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)]">{stock.avg.toFixed(2)}</td>
-                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)] border-r border-[#f1f1f1]">
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-gray-600">{stock.qty}</td>
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-gray-600">{stock.avg.toFixed(2)}</td>
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-gray-600 border-r border-gray-300">
                     {stock.price.toFixed(2)}
                   </td>
-                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)]">{curValue.toFixed(2)}</td>
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-gray-600">{curValue.toFixed(2)}</td>
                   <td className={`py-2.5 px-2.5 text-right font-normal text-sm ${profClass}`}>
                     {(curValue - stock.avg * stock.qty).toFixed(2)}
                   </td>
                   <td className={`py-2.5 px-2.5 text-right font-normal text-sm ${profClass}`}>{stock.net}</td>
-                  <td className={`py-2.5 px-2.5 text-right font-normal text-[0.6rem] ${dayClass}`}>{stock.day}</td>
+                  <td className={`py-2.5 px-2.5 text-right font-normal text-[0.6rem] border-r border-gray-300 ${dayClass}`}>{stock.day}</td>
                 </tr>
               );
             })}

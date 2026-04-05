@@ -37,15 +37,15 @@ const WatchList = () => {
      <div className="h-full shadow-md overflow-y-auto relative">
 
       {/* Search Bar */}
-      <div className="flex items-center justify-evenly relative px-3 ">
+      <div className="flex items-center relative">
         <input
           type="text"
           name="search"
           id="search"
           placeholder="Search eg:infy, bse, nifty fut weekly, gold mcx"
-          className="w-full border-none pl-3 pr-15 py-3 text-md text-gray-400 ring-1 focus:ring-red-400 focus:ring-2 transition-all duration-300 focus:outline-none bg-gray-00 my-4 rounded-md"
+          className="w-full pl-3 pr-15 py-3 text-md text-gray-400 border-b border-gray-300 transition-all duration-300 focus:outline-none mt-4 focus:border-b-2 focus:border-red-400"
         />
-        <span className="absolute right-5 text-sm font-normal text-gray-400">
+        <span className="absolute right-5 text-sm font-normal text-gray-400 mt-4">
           {watchlist.length} / 50
         </span>
       </div>
