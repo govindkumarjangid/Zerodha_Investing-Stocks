@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import GeneralContext from "./GeneralContext";
-import axiosInstance from "../../configs/axios.js";
+import axiosInstance from "../../configs/axiosInstance.js";
 import toast from "react-hot-toast";
 import { FaSpinner } from "react-icons/fa";
 

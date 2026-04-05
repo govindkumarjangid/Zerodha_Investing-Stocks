@@ -1,8 +1,7 @@
 import { MdOutlineMenuBook } from "react-icons/md";
 import { Link } from 'react-router-dom'
-import axiosInstance from "../../configs/axios";
-import { useState } from "react";
-import { useEffect } from "react";
+import axiosInstance from "../../configs/axiosInstance.js";
+import { useState,useEffect } from "react";
 import toast from "react-hot-toast";
 import SkeletonOrdersRow from "../ui/SkeletonOrdersRow";
 
@@ -25,7 +24,6 @@ const Orders = () => {
       setLoading(false);
     }
   }
-
 
   useEffect(() => {
     fetchOrders();

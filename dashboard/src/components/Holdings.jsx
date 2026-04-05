@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import VerticalGraph from "./VerticalGraph";
-import axiosInstance from "../../configs/axios.js";
+import axiosInstance from "../../configs/axiosInstance.js";
 import toast from "react-hot-toast";
 import SkeletonRow from "../ui/SkeletonRow.jsx";
 

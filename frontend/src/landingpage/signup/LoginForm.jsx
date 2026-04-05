@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { BiLoaderAlt } from "react-icons/bi";
-import axiosInstance from '../../../../dashboard/configs/axios';
+import axiosInstance from '../../../lib/axiosInstance.js'
 import toast from 'react-hot-toast';
 
 const LoginForm = () => {
@@ -41,7 +41,7 @@ const LoginForm = () => {
             toast.success(data?.message);
 
             setTimeout(() => {
-                const dashboardUrl = `https://zerodha-investing-stocks-5gdp.vercel.app/`;
+                const dashboardUrl = `http://localhost:5174/`;
                 window.location.href = dashboardUrl;
             }, 1000);
 

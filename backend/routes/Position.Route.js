@@ -8,4 +8,4 @@ const positionRoute = express.Router();
 positionRoute.get('/get-positions', protect, getPositions)
 
 
-export default positionRoute;
+export default positionRoute

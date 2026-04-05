@@ -1,5 +1,4 @@
-import axiosInstance from '../../configs/axios.js';
-// import { positions } from '../data/data'
+import axiosInstance from '../../configs/axiosInstance.js';
 import { useState, useEffect } from 'react';
 import ListSkeleton from '../ui/ListSkeleton.jsx';
 
