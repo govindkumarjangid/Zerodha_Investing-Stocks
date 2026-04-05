@@ -1,9 +1,111 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import  VerticalGraph  from "./VerticalGraph";
+import axios from 'axios'
 
 const Holdings = () => {
+
+  const [allHoldings, setAllHoldings] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3002/allHoldings").then((res) => {
+      setAllHoldings(res.data);
+    });
+  }, []);
+
+  const labels = allHoldings.map((subArray) => subArray["name"]);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Stock Price",
+        data: allHoldings.map((stock) => stock.price),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+
   return (
-    <div>Holdings</div>
+    <>
+      <h3 className="text-[1.3rem] font-light text-gray-600 mb-5">
+        Holdings ({allHoldings.length})
+      </h3>
+
+      <div className="w-full">
+        <table className="w-full border border-collapse rounded-md">
+          <thead>
+            <tr className="border border-gray-300 ">
+              {["Instrument", "Qty.", "Avg. cost", "LTP", "Cur. val", "P&L", "Net chg.", "Day chg."].map(
+                (heading, i) => (
+                  <th
+                    key={i}
+                    className={`py-3.75 px-2.5 text-gray-400 font-light text-sm
+                      ${i === 0 ? "text-left" : "text-right"}
+                      ${i === 0 || i === 3 ? "border border-gray-300" : ""}`}
+                  >
+                    {heading}
+                  </th>
+                )
+              )}
+            </tr>
+          </thead>
+
+          <tbody>
+            {allHoldings.map((stock, index) => {
+              const curValue = stock.price * stock.qty;
+              const isProfit = curValue - stock.avg * stock.qty >= 0.0;
+              const profClass = isProfit ? "text-[rgb(72,194,55)]" : "text-[rgb(250,118,78)]";
+              const dayClass = stock.isLoss ? "text-[rgb(250,118,78)]" : "text-[rgb(72,194,55)]";
+
+              return (
+                <tr key={index} className="border-t border-b border-[rgb(211,211,211)]">
+                  <td className="py-2.5 px-2.5 text-left font-normal text-sm text-[rgb(73,73,73)] border-r border-[#f1f1f1]">
+                    {stock.name}
+                  </td>
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)]">{stock.qty}</td>
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)]">{stock.avg.toFixed(2)}</td>
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)] border-r border-[#f1f1f1]">
+                    {stock.price.toFixed(2)}
+                  </td>
+                  <td className="py-2.5 px-2.5 text-right font-normal text-sm text-[rgb(73,73,73)]">{curValue.toFixed(2)}</td>
+                  <td className={`py-2.5 px-2.5 text-right font-normal text-sm ${profClass}`}>
+                    {(curValue - stock.avg * stock.qty).toFixed(2)}
+                  </td>
+                  <td className={`py-2.5 px-2.5 text-right font-normal text-sm ${profClass}`}>{stock.net}</td>
+                  <td className={`py-2.5 px-2.5 text-right font-normal text-[0.6rem] ${dayClass}`}>{stock.day}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Summary Row */}
+      <div className="flex items-center justify-center mt-15">
+
+        <div className="flex-[0_0_33%]">
+          <h5 className="text-2xl text-gray-600">
+            29,875.<span className="font-light text-sm">55</span>
+          </h5>
+          <p className="text-sm text-gray-400 font-light mt-3">Total investment</p>
+        </div>
+
+        <div className="flex-[0_0_33%]">
+          <h5 className="text-2xl text-gray-600">
+            31,428.<span className="font-light text-sm">95</span>
+          </h5>
+          <p className="text-sm text-gray-400 font-light mt-3">Current value</p>
+        </div>
+
+        <div className="flex-[0_0_33%]">
+          <h5 className="text-2xl text-gray-600">1,553.40 (+5.20%)</h5>
+          <p className="text-sm text-gray-400 font-light mt-3">P&L</p>
+        </div>
+      </div>
+
+      <VerticalGraph data={data} />
+    </>
   )
 }
 
-export default Holdings
+export default Holdings;

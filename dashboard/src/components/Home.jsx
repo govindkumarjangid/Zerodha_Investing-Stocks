@@ -1,9 +1,12 @@
-import React from 'react'
-
+import TopBar from './TopBar';
+import DashBoard from './DashBoard'
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+    <TopBar/>
+    <DashBoard />
+    </>
   )
 }
 
-export default Home
+export default Home;
