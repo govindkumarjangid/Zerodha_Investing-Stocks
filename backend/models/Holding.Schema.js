@@ -11,6 +11,6 @@ const holdingSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
-const Holding = mongoose.model("Holding", holdingSchema);
+const Holding = new mongoose.model("Holding", holdingSchema);
 
 export default Holding;

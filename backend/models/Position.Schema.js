@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const potionsSchema = new mongoose.Schema({
-    product: { type: String, required: true, unique: true },
-    name: { type: String, required: true, unique: true },
+    product: { type: String, required: true },
+    name: { type: String, required: true },
     qty: { type: Number, required: true },
     avg: { type: Number, required: true },
     price: { type: Number, required: true },

@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true},
     qty: { type: Number, required: true },
     price: { type: Number, required: true },
-    model: { type: String, required: true },
+    mode: { type: String, required: true },
 
 }, { timestamps: true });
 
