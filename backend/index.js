@@ -20,6 +20,10 @@ app.use(cors());
 
 
 // routes
+app.get('/', (req, res) => {
+    res.send("Zerodha Clone Server APIs")
+})
+
 app.use('/api/holding', holdingRoute);
 app.use('/api/order', orderRoute);
 app.use('/api/position', positionRoute);
