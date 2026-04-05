@@ -11,7 +11,8 @@ export const register = async (req, res) => {
         if (!username || !email || !password)
             return res.status(400).json({ message: 'All fields are required' });
 
-        let existingUser = await User.find({ email });
+        let existingUser = await User.findOne({ email });
+        console.log(existingUser)
 
         if (existingUser)
             return res.status(400).json({ message: 'User already exists' });
@@ -31,12 +32,15 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email }).select("-password");
+
+        const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ message: 'User not found' });
+
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
+        console.log(user, isMatch);
         const payload = { id: user._id, email: user.email };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });

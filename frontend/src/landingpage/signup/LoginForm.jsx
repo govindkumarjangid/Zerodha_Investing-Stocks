@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { BiLoaderAlt } from "react-icons/bi";
+import axiosInstance from '../../../../dashboard/configs/axios';
+import toast from 'react-hot-toast';
 
 const LoginForm = () => {
 
@@ -23,8 +25,25 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const dashboardUrl = `http://localhost:5174/`;
-        window.location.href = dashboardUrl;
+         setLoading(true)
+        try {
+            const { data } = await axiosInstance.post(`/auth/${state}`, formData);
+            const token = data.token;
+            const user = data.user;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
+
+            toast.success(`${state} successfully`)
+
+            const dashboardUrl = `https://zerodha-investing-stocks-5gdp.vercel.app/`;
+            window.location.href = dashboardUrl;
+
+        } catch (error) {
+            console.log("Error : ", error);
+            toast.error(error.response?.data?.message || error?.message);
+        }finally{
+            setLoading(false);
+        }
     };
 
     return (
@@ -46,7 +65,7 @@ const LoginForm = () => {
                 <div className="w-full relative">
                     <input
                         type="text"
-                        name="name"
+                        name="username"
                         placeholder=" "
                         value={formData.username}
                         onChange={handleInputChange}
@@ -70,6 +89,7 @@ const LoginForm = () => {
             <div className="relative w-full">
                 <input
                     type="email"
+                    name="email"
                     placeholder=" "
                     value={formData.email}
                     onChange={handleInputChange}
@@ -92,6 +112,7 @@ const LoginForm = () => {
             <div className="relative w-full">
                 <input
                     type="password"
+                    name="password"
                     placeholder=" "
                     value={formData.password}
                     onChange={handleInputChange}

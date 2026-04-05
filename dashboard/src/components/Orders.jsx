@@ -36,7 +36,7 @@ const Orders = () => {
 
       <h3 className="text-[1.3rem] font-light text-gray-600 mb-5">
         {
-          loading ? <div className="animate-pulse h-7 w-30 rounded-md bg-gray-300"></div> : <> Orders ({orders.length})</>
+          loading ? <div className="animate-pulse h-7 w-30 rounded-md bg-gray-300"></div> : <> Orders ({orders?.length || 0})</>
         }
       </h3>
 
