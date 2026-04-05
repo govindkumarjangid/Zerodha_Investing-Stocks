@@ -25,23 +25,30 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-         setLoading(true)
+        setLoading(true)
         try {
-            const { data } = await axiosInstance.post(`/auth/${state}`, formData);
+            const payload = state === "register" ? formData
+                : { email: formData.email, password: formData.password };
+
+            const { data } = await axiosInstance.post(`/auth/${state}`, payload, { headers: { 'Content-Type': 'application/json' } });
+
             const token = data.token;
             const user = data.user;
+
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
 
-            toast.success(`${state} successfully`)
+            toast.success(data?.message);
 
-            const dashboardUrl = `https://zerodha-investing-stocks-5gdp.vercel.app/`;
-            window.location.href = dashboardUrl;
+            setTimeout(() => {
+                const dashboardUrl = `https://zerodha-investing-stocks-5gdp.vercel.app/`;
+                window.location.href = dashboardUrl;
+            }, 1000);
 
         } catch (error) {
             console.log("Error : ", error);
             toast.error(error.response?.data?.message || error?.message);
-        }finally{
+        } finally {
             setLoading(false);
         }
     };
