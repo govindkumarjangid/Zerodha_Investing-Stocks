@@ -1,6 +1,6 @@
 import Menu from './Menu';
 
-const Topbar = ({user}) => {
+const Topbar = () => {
   return (
       <div className="flex items-center w-full h-[10vh] shadow-md box-border z-9">
 
@@ -29,7 +29,7 @@ const Topbar = ({user}) => {
 
         </div>
 
-      <Menu user={user}/>
+      <Menu />
 
     </div>
 

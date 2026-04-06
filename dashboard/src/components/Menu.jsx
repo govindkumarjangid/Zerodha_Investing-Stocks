@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiUser, FiLogOut } from "react-icons/fi";
 
-const Menu = ({user}) => {
+const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
@@ -86,7 +86,7 @@ const Menu = ({user}) => {
                 onClick={() => {
                   localStorage.removeItem("token");
                   localStorage.removeItem("user");
-                  window.location.href = "http://localhost:5173/";
+                  // window.location.href = "http://localhost:5173/";
                 }}
               >
                 <FiLogOut className="mr-2 text-lg" />

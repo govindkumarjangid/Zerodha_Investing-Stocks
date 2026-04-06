@@ -32,13 +32,20 @@ const LoginForm = () => {
             const { data } = await axiosInstance.post(
                 `/auth/${state}`,
                 payload,
-                { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+                { headers: { 'Content-Type': 'application/json' } }
             );
+
+            if (data?.token) {
+                localStorage.setItem('token', data.token);
+                if (data?.user) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                }
+            }
 
             toast.success(data?.message || "Login Successfull");
 
             setTimeout(() => {
-                window.location.href = 'https://zerodha-investing-stocks-5gdp.vercel.app' || "http://localhost:5173/";
+                window.location.href = import.meta.env.VITE_DASHBOARD_URL || "http://localhost:5174/";
             }, 1000);
 
         } catch (error) {

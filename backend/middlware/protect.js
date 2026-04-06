@@ -2,16 +2,11 @@ import jwt from 'jsonwebtoken'
 import User from '../models/User.Schema.js';
 
 export const protect = async (req, res, next) => {
-    let token = req.cookies?.token;
+    let token;
 
-    if (req.originalUrl?.includes('/api/auth/me')) {
-        console.log('[auth/me] cookie header:', req.headers.cookie || 'none');
-        console.log('[auth/me] parsed cookies:', req.cookies || {});
-    }
-
-    if (!token && req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
         token = req.headers.authorization.split(" ")[1];
-    } else if (!token && req.headers.authorization) {
+    } else if (req.headers.authorization) {
         token = req.headers.authorization;
     }
 

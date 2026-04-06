@@ -24,13 +24,6 @@ export const register = async (req, res) => {
         const payload = { id: newUser._id, email: newUser.email };
         const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-            maxAge: 24 * 60 * 60 * 1000
-        });
-
         res.status(201).json({ token, user: newUser, message: 'User created successfully' });
 
     } catch (error) {
@@ -52,14 +45,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-            maxAge: 24 * 60 * 60 * 1000
-        });
-
-        res.status(201).json({ token, user, message: "Login Successfully" });
+        res.status(200).json({ token, user, message: "Login Successfully" });
 
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
