@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react';
 import { BiLoaderAlt } from "react-icons/bi";
 import axiosInstance from '../../../lib/axiosInstance.js'
@@ -30,19 +29,16 @@ const LoginForm = () => {
             const payload = state === "register" ? formData
                 : { email: formData.email, password: formData.password };
 
-            const { data } = await axiosInstance.post(`/auth/${state}`, payload, { headers: { 'Content-Type': 'application/json' } });
+            const { data } = await axiosInstance.post(
+                `/auth/${state}`,
+                payload,
+                { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+            );
 
-            const token = data.token;
-            const user = data.user;
-
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
-
-            toast.success(data?.message);
+            toast.success(data?.message || "Login Successfull");
 
             setTimeout(() => {
-                const dashboardUrl = `http://localhost:5174/`;
-                window.location.href = dashboardUrl;
+                window.location.href = 'https://zerodha-investing-stocks-5gdp.vercel.app' || "http://localhost:5173/";
             }, 1000);
 
         } catch (error) {

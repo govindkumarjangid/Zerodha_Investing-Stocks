@@ -1,10 +1,8 @@
-import React from 'react'
-// #FAFAFB
 
 const Steps = () => {
     return (
         <div className="w-full bg-[#FAFAFB]">
-            <div className="max-w-6xl mx-auto mt-40 text-text-color px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-4 border-b border-gray-200 pb-20 ">
+            <div className="max-w-6xl mx-auto mt-40 text-text-color px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-4 border-b border-gray-200 py-20 ">
 
                 {/* Section Title */}
                 <h2 className="text-3xl md:text-4xl font-medium text-center text-gray-800 mb-20 md:mb-24">

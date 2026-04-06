@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiUser, FiLogOut } from "react-icons/fi";
 
-const Menu = () => {
+const Menu = ({user}) => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
@@ -56,11 +56,11 @@ const Menu = () => {
             className="flex items-center justify-evenly ml-5 cursor-pointer group bg-gray-100 p-2 rounded-md active:scale-95 tarnsition-all duration-300"
             onClick={handleProfileClick}
           >
-            <div className="w-8 h-8 text-[0.7rem] text-red-400 rounded-full flex items-center justify-center bg-[#f1f1f1] mr-2 font-bold border border-gray-300">
-              ZU
+            <div className="w-8 h-8 text-[0.7rem] text-red-400 rounded-full flex items-center justify-center bg-[#f1f1f1] mr-2 font-bold border border-gray-300 uppercase">
+              {user?.username ? user.username.substring(0, 2) : "US"}
             </div>
-            <p className="text-xs font-semibold group-hover:text-red-400 transition-colors">
-              USERID
+            <p className="text-xs font-semibold group-hover:text-red-400 transition-colors uppercase">
+              {user?.username || "USER"}
             </p>
           </div>
 
@@ -75,27 +75,29 @@ const Menu = () => {
                 </div>
                 {/* Name & Email */}
                 <div className="overflow-hidden">
-                  <p className="text-sm font-semibold text-gray-800 truncate">Zain Ul</p>
-                  <p className="text-xs text-gray-500 truncate">zainul@example.com</p>
+                  <p className="text-sm font-semibold text-gray-800 truncate capitalize">{user?.username}</p>
+                  <p className="text-xs text-gray-500 truncate">{user?.email}</p>
                 </div>
               </div>
 
               {/* Logout Button */}
               <button
                 className="w-full text-left flex items-center px-4 py-3 mt-1 text-sm text-red-600 hover:bg-red-50 transition-all duration-300 active:scale-95 cursor-pointer"
-                onClick={() =>  setIsProfileDropdownOpen(false) }
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("user");
+                  window.location.href = "http://localhost:5173/";
+                }}
               >
                 <FiLogOut className="mr-2 text-lg" />
                 Logout
               </button>
-
             </div>
           )}
+
         </div>
 
       </div>
-
-
 
     </div>
   );
