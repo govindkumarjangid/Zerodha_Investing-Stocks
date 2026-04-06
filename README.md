@@ -29,9 +29,35 @@ A full-stack web application that replicates the core functionality and user int
 
 ## 📁 Project Structure
 
-* `/frontend`: The marketing website and landing pages.
-* `/dashboard`: The main trading application interface (Kite clone).
-* `/backend`: The REST API server handling user data, orders, and authentication.
+```text
+Zerodha_Investing-Stocks/
+├── backend/                 # Node.js + Express API Backend
+│   ├── configs/             # Database connection setup
+│   ├── controllers/         # Request handlers (Holding, Order, Position, User)
+│   ├── middlware/           # Custom middlewares (e.g., Auth protection)
+│   ├── models/              # Mongoose database schemas
+│   ├── routes/              # Express API route definitions
+│   └── index.js             # Main server entry point
+└── frontend/                # React + Vite Frontend App
+    ├── public/              # Static assets (images, SVGs)
+    ├── src/
+    │   ├── dashboard/       # Main Trading Dashboard App
+    │   │   ├── components/  # Dashboard UI components (Holdings, Orders, Charts)
+    │   │   ├── data/        # Mock data / static configurations
+    │   │   ├── UI/          # Reusable UI components & Skeletons
+    │   ├── landingpage/     # Marketing & Informational Website
+    │   │   ├── about/       # About page components
+    │   │   ├── home/        # Home/Landing page components
+    │   │   ├── pricing/     # Pricing page components
+    │   │   ├── products/    # Products page components
+    │   │   ├── signup/      # Authentication pages
+    │   │   ├── support/     # Support portal components
+    │   │   └── UI/          # Reusable landing page UI components (Navbar, Footer)
+    │   ├── context/         # React Context for state management
+    │   ├── lib/             # Utility functions (Axios instance)
+    │   ├── App.jsx          # App root & Routing setup
+    │   └── main.jsx         # React application entry point
+```
 
 ## ⚙️ Installation & Setup
 
@@ -45,25 +71,18 @@ A full-stack web application that replicates the core functionality and user int
    ```bash
    cd backend
    npm install
+   # Create a .env file and add your MongoDB URI and PORT
    npm start
    ```
 
-3. **Setup the Frontend & Dashboard:**
+3. **Setup the Frontend:**
    ```bash
-   # Open two new terminals
-
-   # Terminal 1 - For Frontend
    cd frontend
-   npm install
-   npm run dev
-
-   # Terminal 2 - For Dashboard
-   cd dashboard
    npm install
    npm run dev
    ```
 
-4. Open the respective `localhost` URLs provided by Vite in your browser.
+4. Open the `localhost` URL provided by Vite in your browser to view the application.
 
 ## 📝 License
 
