@@ -1,16 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import axiosInstance from '../../configs/axiosInstance.js';
 import TopBar from './TopBar';
 import DashBoard from './DashBoard';
 
 const Home = () => {
 
   return (
-    <>
+    <div className="h-screen w-full flex flex-col overflow-hidden">
       <TopBar />
       <DashBoard />
-    </>
+    </div>
   );
 }
 

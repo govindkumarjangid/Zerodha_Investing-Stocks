@@ -6,6 +6,11 @@ const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
+  // User Info Helper
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userName = user?.username || "User";
+  const userEmail = user?.email || "";
+  const userInitial = userName.charAt(0).toUpperCase();
 
   const handleMenuClick = (index) => setSelectedMenu(index);
   const handleProfileClick = () => setIsProfileDropdownOpen(!isProfileDropdownOpen);
@@ -15,18 +20,18 @@ const Menu = () => {
   const activeMenuClass = "text-sm text-red-400 ";
 
   const menuItems = [
-    { label: "Dashboard", path: "/", index: 0 },
-    { label: "Orders", path: "/orders", index: 1 },
-    { label: "Holdings", path: "/holdings", index: 2 },
-    { label: "Positions", path: "/positions", index: 3 },
-    { label: "Funds", path: "/funds", index: 4 },
-    { label: "Apps", path: "/apps", index: 6 },
+    { label: "Dashboard", path: "/dashboard", index: 0 },
+    { label: "Orders", path: "/dashboard/orders", index: 1 },
+    { label: "Holdings", path: "/dashboard/holdings", index: 2 },
+    { label: "Positions", path: "/dashboard/positions", index: 3 },
+    { label: "Funds", path: "/dashboard/funds", index: 4 },
+    { label: "Apps", path: "/dashboard/apps", index: 6 },
   ];
 
   return (
     <div className="h-full flex-[0_0_68%] px-3 py-2.5 box-border flex items-center justify-between z-9">
 
-      <img src="./images/kite-icon.png" style={{ width: "50px" }} alt="logo" />
+      <img src="/images/kite-icon.png" style={{ width: "50px" }} alt="logo" />
 
       <div className="flex items-center justify-between">
 
@@ -57,10 +62,10 @@ const Menu = () => {
             onClick={handleProfileClick}
           >
             <div className="w-8 h-8 text-[0.7rem] text-red-400 rounded-full flex items-center justify-center bg-[#f1f1f1] mr-2 font-bold border border-gray-300 uppercase">
-              {user?.username ? user.username.substring(0, 2) : "US"}
+              {userInitial}
             </div>
             <p className="text-xs font-semibold group-hover:text-red-400 transition-colors uppercase">
-              {user?.username || "USER"}
+              {userName}
             </p>
           </div>
 
@@ -75,8 +80,8 @@ const Menu = () => {
                 </div>
                 {/* Name & Email */}
                 <div className="overflow-hidden">
-                  <p className="text-sm font-semibold text-gray-800 truncate capitalize">{user?.username}</p>
-                  <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                  <p className="text-sm font-semibold text-gray-800 truncate capitalize">{userName}</p>
+                  <p className="text-xs text-gray-500 truncate">{userEmail}</p>
                 </div>
               </div>
 
@@ -86,7 +91,7 @@ const Menu = () => {
                 onClick={() => {
                   localStorage.removeItem("token");
                   localStorage.removeItem("user");
-                  // window.location.href = "http://localhost:5173/";
+                  window.location.href = "/signup";
                 }}
               >
                 <FiLogOut className="mr-2 text-lg" />

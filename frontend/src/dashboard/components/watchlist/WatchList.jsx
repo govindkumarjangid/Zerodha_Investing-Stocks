@@ -1,6 +1,6 @@
-import { watchlist } from "../data/data";
-import DoughnoutChart from "./DoughnoutChart";
-import WatchListItem from "../ui/WatchListItem";
+import { watchlist } from "../../data/data";
+import DoughnoutChart from "../graphs/DoughnoutChart";
+import WatchListItem from "../../UI/WatchListItem";
 
 const labels = watchlist.map((subArray) => subArray["name"]);
 

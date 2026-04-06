@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BuyActionWindow from "./BuyActionWindow";
+import BuyActionWindow from "../src/dashboard/components/watchlist/BuyActionWindow.jsx";
 
 
 const GeneralContext = React.createContext({

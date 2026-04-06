@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { BiLoaderAlt } from "react-icons/bi";
 import axiosInstance from '../../../lib/axiosInstance.js'
-import toast from 'react-hot-toast';
+import {toast} from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
 
@@ -21,6 +22,9 @@ const LoginForm = () => {
             [name]: value
         }));
     }
+
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,11 +47,7 @@ const LoginForm = () => {
             }
 
             toast.success(data?.message || "Login Successfull");
-
-            setTimeout(() => {
-                window.location.href = import.meta.env.VITE_DASHBOARD_URL || "http://localhost:5174/";
-            }, 1000);
-
+            navigate('/dashboard');
         } catch (error) {
             console.log("Error : ", error);
             toast.error(error.response?.data?.message || error?.message);

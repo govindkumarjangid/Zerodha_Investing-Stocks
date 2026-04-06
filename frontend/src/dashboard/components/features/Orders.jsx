@@ -1,9 +1,9 @@
 import { MdOutlineMenuBook } from "react-icons/md";
 import { Link } from 'react-router-dom'
-import axiosInstance from "../../configs/axiosInstance.js";
+import axiosInstance from "../../../../lib/axiosInstance.js";
 import { useState,useEffect } from "react";
 import toast from "react-hot-toast";
-import SkeletonOrdersRow from "../ui/SkeletonOrdersRow";
+import SkeletonOrdersRow from "../../UI/SkeletonOrdersRow.jsx";
 
 const Orders = () => {
 
@@ -15,7 +15,7 @@ const Orders = () => {
     try {
       setLoading(true);
       const { data } = await axiosInstance.get('/order/get-orders');
-      setOrders(data.orders);
+      setOrders(data?.orders || []);
 
     } catch (error) {
       toast.error(error?.message || "cannot find orders");
@@ -63,7 +63,7 @@ const Orders = () => {
                   <SkeletonOrdersRow key={i} />
                 ))}
               </> : <>
-                {orders.map((order, index) => {
+                {orders?.map((order, index) => {
                   return (
                     <tr key={index} className="border border-gray-300">
                       <td className="py-2.5 px-2.5  font-normal text-center text-sm border-r border-gray-300">

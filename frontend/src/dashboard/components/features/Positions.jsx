@@ -1,6 +1,6 @@
-import axiosInstance from '../../configs/axiosInstance.js';
+import axiosInstance from '../../../../lib/axiosInstance.js';
 import { useState, useEffect } from 'react';
-import ListSkeleton from '../ui/ListSkeleton.jsx';
+import ListSkeleton from '../../UI/ListSkeleton.jsx';
 
 
 const Positions = () => {
@@ -13,7 +13,7 @@ const Positions = () => {
     try {
       setLoading(true);
       const { data } = await axiosInstance.get('/position/get-positions');
-      setPositions(data.positions);
+      setPositions(data?.positions || []);
       console.log(data)
     } catch (error) {
       toast.error(error?.message || "cannot find positions");
@@ -32,7 +32,7 @@ const Positions = () => {
     <>
       <h3 className="text-[1.3rem] font-light text-gray-600 mb-5">
         {
-          loading ? <div className="animate-pulse h-7 w-30 rounded-md bg-gray-300"></div> : <> Positions ({positions.length})</>
+          loading ? <div className="animate-pulse h-7 w-30 rounded-md bg-gray-300"></div> : <> Positions ({positions?.length || 0})</>
         }
       </h3>
 
@@ -60,7 +60,7 @@ const Positions = () => {
                   <ListSkeleton key={i} />
                 ))}
               </> : <>
-                {positions.map((stock, index) => {
+                {positions?.map((stock, index) => {
                   const curValue = stock.price * stock.qty;
                   const isProfit = curValue - stock.avg * stock.qty >= 0.0;
                   const profClass = isProfit ? "text-green-500" : "text-red-500";

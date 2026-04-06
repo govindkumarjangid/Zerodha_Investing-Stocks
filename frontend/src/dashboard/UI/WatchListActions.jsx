@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import GeneralContext from '../components/GeneralContext'
+import GeneralContext from '../../../context/GeneralContext'
 import { Tooltip } from "@mui/material";
 import { BarChartOutlined, MoreHoriz } from "@mui/icons-material";
 
