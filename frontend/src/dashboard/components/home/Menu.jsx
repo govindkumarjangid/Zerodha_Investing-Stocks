@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { FiUser, FiLogOut } from "react-icons/fi";
 
 const Menu = () => {
@@ -14,6 +14,7 @@ const Menu = () => {
 
   const handleMenuClick = (index) => setSelectedMenu(index);
   const handleProfileClick = () => setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  const navigate = useNavigate();
 
 
   const menuClass = "text-sm text-gray-500 font-light hover:text-red-400 transition-colors duration-300";
@@ -91,7 +92,7 @@ const Menu = () => {
                 onClick={() => {
                   localStorage.removeItem("token");
                   localStorage.removeItem("user");
-                  window.location.href = "/signup";
+                  navigate('/');
                 }}
               >
                 <FiLogOut className="mr-2 text-lg" />
